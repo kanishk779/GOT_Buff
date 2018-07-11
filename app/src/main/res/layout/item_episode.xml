@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="director"
+            android:text="Director"
             android:textSize="18sp"/>
         <TextView
             android:layout_width="wrap_content"

@@ -25,6 +25,8 @@
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:id="@+id/charactername"
+        android:gravity="center_horizontal|center_vertical"
+        android:hint="Name"
         android:background="@drawable/border_for_item"/>
     <Button
         android:layout_width="wrap_content"

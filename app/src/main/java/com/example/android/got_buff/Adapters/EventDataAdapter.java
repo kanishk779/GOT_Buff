@@ -39,6 +39,8 @@ public class EventDataAdapter extends RecyclerView.Adapter<EventDataAdapter.View
 
     @Override
     public int getItemCount() {
+        if(list!=null)
+            return list.size();
         return 0;
     }
     public class ViewHolder extends RecyclerView.ViewHolder{

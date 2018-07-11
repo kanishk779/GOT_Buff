@@ -22,15 +22,16 @@ import java.util.ArrayList;
  */
 
 public class EventFragment extends Fragment {
-    ArrayList<AllEvent> EventData;
-    RecyclerView recyclerView;
-    EventDataAdapter adapter;
+    private ArrayList<AllEvent> EventData;
+    private RecyclerView recyclerView;
+    private EventDataAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_episodes,container,false);
+        View v = inflater.inflate(R.layout.fragment_event,container,false);
         try{
             EventData = (ArrayList<AllEvent>) getArguments().getSerializable("events");
+            /*Toast.makeText(getContext(), "Event Fragment\n"+EventData, Toast.LENGTH_SHORT).show();*/
         }
         catch(Exception e)
         {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        db = new CharacterHistoryDatabase(this);
         SeeResult = findViewById(R.id.result);
         charactername = findViewById(R.id.charactername);
         SeeResult.setOnClickListener(new View.OnClickListener() {
@@ -40,36 +42,10 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(isValid())
                 {
-                    String URL = BASE_URL + NAME;
-                    StringRequest sr2 = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                character = new Data();
-                                Gson g = new Gson();
-                                JSONObject jo = new JSONObject(response);
-                                JSONObject jo1 = jo.getJSONObject("body");
-                                character = g.fromJson(jo1.toString(),Data.class);
-                            }
-                            catch (Exception e) {
-                                Toast.makeText(SearchActivity.this, "Deep" + e, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(SearchActivity.this, "" + error, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    Volley.newRequestQueue(SearchActivity.this).add(sr2);
-                    //CODE FOR INSERTING INTO DATABASE
-                    //CODE FOR SENDING THIS DATA TO DETAIL ACTIVITY
-                    db.openWrite();
-                    db.insert(character);
-                    db.close();
                     Intent in = new Intent(SearchActivity.this,CharacterDetail.class);
-                    in.putExtra("character",character);
+                    in.putExtra("name",NAME);
                     startActivity(in);
+                    finish();
                 }
             }
         });

@@ -20,13 +20,15 @@
         android:orientation="horizontal"
         android:layout_margin="10dp">
         <TextView
-            android:layout_width="90dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Type"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="241dp"
             android:layout_height="wrap_content"
-            android:id="@+id/citytype"/>
+            android:id="@+id/citytype"
+            android:gravity="center_horizontal"
+            android:text="castle"/>
 
     </LinearLayout>
     <LinearLayout
@@ -35,13 +37,15 @@
         android:orientation="horizontal"
         android:layout_margin="10dp">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="For More Info"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="241dp"
             android:layout_height="wrap_content"
-            android:id="@+id/citymoreInfo"/>
+            android:id="@+id/citymoreInfo"
+            android:gravity="center_horizontal"
+            android:text="more "/>
 
     </LinearLayout>
 

@@ -1,5 +1,7 @@
 package com.example.android.got_buff.Fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,16 +25,17 @@ import java.util.ArrayList;
  * Created by hp on 02-07-2018.
  */
 
-public class CitiesFragment extends Fragment {
+public class CitiesFragment extends Fragment implements CitiesDataAdapter.MyInterface{
     private ArrayList<AllCity> CityData;
     private CitiesDataAdapter adapter;
     private RecyclerView recyclerView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_episodes,container,false);
+        View v = inflater.inflate(R.layout.fragment_cities,container,false);
         try{
             CityData = (ArrayList<AllCity>) getArguments().getSerializable("cities");
+            /*Toast.makeText(getContext(), "Cities Fragment\n"+CityData, Toast.LENGTH_SHORT).show();*/
         }
         catch(Exception e)
         {
@@ -49,5 +52,12 @@ public class CitiesFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new CitiesDataAdapter(CityData);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemClick1(int position) {
+        AllCity city = CityData.get(position);
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(city.getLink()));
+        startActivity(browserIntent);
     }
 }

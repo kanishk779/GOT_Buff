@@ -21,6 +21,14 @@ import java.util.ArrayList;
 
 public class HistoryDataAdapter extends RecyclerView.Adapter<HistoryDataAdapter.ViewHolder> {
     ArrayList<Data> list;
+    MyInterface1 mListener1;
+
+    public interface MyInterface1{
+        public void onItemClick1(int position);
+    }
+    public void setListener(MyInterface1 Listener){
+        mListener1 = Listener;
+    }
     private static final String BASE_URL = "https://api.got.show";
     public HistoryDataAdapter(ArrayList<Data> list)
     {
@@ -46,6 +54,8 @@ public class HistoryDataAdapter extends RecyclerView.Adapter<HistoryDataAdapter.
 
     @Override
     public int getItemCount() {
+        if(list!=null)
+            return list.size();
         return 0;
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -57,6 +67,17 @@ public class HistoryDataAdapter extends RecyclerView.Adapter<HistoryDataAdapter.
             culture =itemView.findViewById(R.id.character_culture);
             name =itemView.findViewById(R.id.character_name);
             poster =itemView.findViewById(R.id.characterimage);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener1!=null){
+                        int position =getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION){
+                            mListener1.onItemClick1(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

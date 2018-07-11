@@ -1,5 +1,6 @@
 package com.example.android.got_buff;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -57,20 +58,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try{
-            Maincitylist=(ArrayList<AllCity>)getIntent().getExtras().getSerializable("listtracks");
+            Maincitylist=(ArrayList<AllCity>)getIntent().getExtras().getSerializable("cities");
+            Toast.makeText(this, ""+Maincitylist, Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
             Log.e("error",e.toString());
         }
         try{
-            Mainepisodelist = (ArrayList<AllEpisode>)getIntent().getExtras().getSerializable("listartist");
+            Mainepisodelist = (ArrayList<AllEpisode>)getIntent().getExtras().getSerializable("episodes");
         }
         catch(Exception e)
         {
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
         }
         try{
-            Maineventlist = (ArrayList<AllEvent>)getIntent().getExtras().getSerializable("listartist");
+            Maineventlist = (ArrayList<AllEvent>)getIntent().getExtras().getSerializable("events");
+            Toast.makeText(this, ""+Maineventlist, Toast.LENGTH_SHORT).show();
         }
         catch(Exception e)
         {
@@ -102,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent in = new Intent(MainActivity.this,SearchActivity.class);
+                startActivity(in);
             }
         });
 

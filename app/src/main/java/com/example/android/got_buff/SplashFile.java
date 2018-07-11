@@ -44,7 +44,7 @@ public class SplashFile extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                new AsyncCaller().execute();
             }
         });
     }
@@ -125,10 +125,10 @@ public class SplashFile extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            Toast.makeText(SplashFile.this, ""+cityList, Toast.LENGTH_LONG).show();
-            Toast.makeText(SplashFile.this, ""+eventList, Toast.LENGTH_LONG).show();
-            Toast.makeText(SplashFile.this, ""+episodeList, Toast.LENGTH_LONG).show();
+            super.onPostExecute(result);/*
+            Toast.makeText(SplashFile.this, ""+cityList, Toast.LENGTH_SHORT).show();
+            Toast.makeText(SplashFile.this, ""+eventList, Toast.LENGTH_SHORT).show();
+            Toast.makeText(SplashFile.this, ""+episodeList, Toast.LENGTH_SHORT).show();*/
             Intent in = new Intent(SplashFile.this,MainActivity.class);
             in.putExtra("cities",cityList);
             in.putExtra("events",eventList);

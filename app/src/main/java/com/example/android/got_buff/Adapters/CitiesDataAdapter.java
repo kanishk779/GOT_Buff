@@ -18,7 +18,15 @@ import java.util.ArrayList;
  */
 
 public class CitiesDataAdapter extends RecyclerView.Adapter<CitiesDataAdapter.ViewHolder> {
-    ArrayList<AllCity> list;
+    private ArrayList<AllCity> list;
+    MyInterface mListener1;
+
+    public interface MyInterface{
+        public void onItemClick1(int position);
+    }
+    public void setListener(MyInterface Listener){
+        mListener1 = Listener;
+    }
     public CitiesDataAdapter(ArrayList<AllCity> list){
         this.list = list;
     }
@@ -26,7 +34,7 @@ public class CitiesDataAdapter extends RecyclerView.Adapter<CitiesDataAdapter.Vi
     @Override
     public CitiesDataAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_episode, parent, false);
+                .inflate(R.layout.item_cities, parent, false);
 
         return new ViewHolder(itemView);
     }
@@ -38,11 +46,14 @@ public class CitiesDataAdapter extends RecyclerView.Adapter<CitiesDataAdapter.Vi
         String text = "<a href='" + link + "'> Get more information </a>";
         holder.name.setText(city.getName());
         holder.type.setText(city.getType());
-        holder.moreInfo.setText(Html.fromHtml(text));
+        //holder.moreInfo.setText(Html.fromHtml(text));
+        holder.moreInfo.setText("Click Here");
     }
 
     @Override
     public int getItemCount() {
+        if(list!=null)
+            return list.size();
         return 0;
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -53,6 +64,17 @@ public class CitiesDataAdapter extends RecyclerView.Adapter<CitiesDataAdapter.Vi
             name = itemView.findViewById(R.id.cityname);
             moreInfo = itemView.findViewById(R.id.citymoreInfo);
             type = itemView.findViewById(R.id.citytype);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener1!=null){
+                        int position =getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION){
+                            mListener1.onItemClick1(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

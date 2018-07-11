@@ -57,7 +57,7 @@ public class CharacterHistoryDatabase extends SQLiteOpenHelper {
         db.execSQL("drop table if exists " + TABLE_NAME + "");
         this.onCreate(db);
     }
-    public void insert(Data character) {
+    public long insert(Data character) {
         StringBuilder sb = new StringBuilder();
         ArrayList<String> books = (ArrayList<String>) character.getBooks();
         for(int i=0;i<books.size();i++)
@@ -72,7 +72,8 @@ public class CharacterHistoryDatabase extends SQLiteOpenHelper {
         cv.put(BIRTHDATE, String.valueOf(character.getDateOfBirth()));
         cv.put(BOOKS, String.valueOf(sb));
         cv.put(IMAGE, character.getImageLink());
-        sdW.insert(TABLE_NAME, null, cv);
+        long i = sdW.insert(TABLE_NAME, null, cv);
+        return i;
     }
     public Data read(String Character) {
         sdR = getReadableDatabase();
